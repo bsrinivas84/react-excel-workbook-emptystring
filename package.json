@@ -1,6 +1,6 @@
 {
   "name": "react-excel-workbook-emptystring",
-  "version": "0.0.1",
+  "version": "1.2.1",
   "description": "An downloadable excel workbook react component also handling zeros as zeros instead of empty strings",
   "main": "lib/index.js",
   "scripts": {

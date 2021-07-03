@@ -77,6 +77,7 @@ externals: [
 
 See the `example` directory for a working example.
 
+> version  > 1.2.0 - Support to add columns conditionally
 ## Testing
 
 I have no idea how to test this.
