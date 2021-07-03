@@ -32,8 +32,8 @@ function sheet_from_array_of_arrays(data, columns) {
 
       if (typeof cell.v === "number") {
         cell.t = "n";
-        if(numFmt) {
-          cell.v = numFmt;
+        if (numFmt) {
+          cell.z = numFmt;
         }
       } else if (typeof cell.v === "boolean") cell.t = "b";
       else if (cell.v instanceof Date) {
@@ -100,7 +100,7 @@ export class Workbook extends Component {
   }
 
   createSheetData(sheet) {
-    const columns = sheet.props.children;
+    const columns = sheet.props.children.filter(c => c && c.props);
     const sheetData = [
       React.Children.map(columns, (column) => column.props.label),
     ];
@@ -120,8 +120,8 @@ export class Workbook extends Component {
           getValue(row) !== 0 && getValue(row) !== ""
             ? getValue(row)
             : getValue(row) === 0
-            ? 0
-            : "";
+              ? 0
+              : "";
         sheetRow.push(data);
       });
       sheetData.push(sheetRow);
@@ -139,6 +139,7 @@ export class Workbook extends Component {
     React.Children.forEach(this.props.children, (sheet) => {
       if (sheet) {
         wb.SheetNames.push(sheet.props.name);
+        const columns = sheet.props.children.filter(c => c && c.props);
         wb.Sheets[sheet.props.name] = sheet_from_array_of_arrays(
           this.createSheetData(sheet),
           columns
